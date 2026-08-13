@@ -12,6 +12,34 @@ Using rust-ppm to generate ppm images and render them in a simple game. The game
 8. hightlight the pattern script using the `syntect` crate or `highlight` crate or any other crate that can highlight code in rust.
 9. format the pattern script using the `rustfmt` crate or any other crate that can format code in rust.
 
+## Script contract
+
+Each script is expected to compute the color channels directly as `u8` values:
+
+```rust
+let r = ...;
+let g = ...;
+let b = ...;
+```
+
+The runtime wraps the final value into the packed `u32` format automatically, so script authors do not need to write:
+
+```rust
+((r as u32) << 16) | ((g as u32) << 8) | (b as u32)
+```
+
+A valid checker example looks like this:
+
+```rust
+let cell = 12u32;
+let on = ((x / cell) + (y / cell)) % 2 == 0;
+let r = if on { 255 } else { 30 };
+let g = if on { 255 } else { 30 };
+let b = if on { 255 } else { 45 };
+```
+
+This rule applies to all script files in the `scripts/` directory.
+
 ## Possible ways to edit the real pixel function on the fly
 
 In a normal Rust binary, you cannot simply take a compiled function like this and mutate its body at runtime:

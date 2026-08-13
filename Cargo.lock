@@ -2298,6 +2298,7 @@ name = "ppm-pattern-game"
 version = "0.1.0"
 dependencies = [
  "iced",
+ "libloading",
  "rust-ppm",
 ]
 

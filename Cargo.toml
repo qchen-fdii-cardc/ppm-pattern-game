@@ -5,4 +5,5 @@ edition = "2024"
 
 [dependencies]
 iced = { version = "0.14.0", features = ["canvas"] }
+libloading = "0.8"
 rust-ppm = "0.1.1"

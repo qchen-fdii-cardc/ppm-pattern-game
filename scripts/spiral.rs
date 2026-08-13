@@ -1,0 +1,10 @@
+let cx = width as f32 / 2.0;
+let cy = height as f32 / 2.0;
+let dx = x as f32 - cx;
+let dy = y as f32 - cy;
+let radius = (dx * dx + dy * dy).sqrt();
+let angle = (dy / (dx + 0.0001)).atan();
+let value = (radius * 0.18 + angle * 24.0).sin();
+let r = ((value + 1.0) * 127.5) as u8;
+let g = (radius as u8).wrapping_add(50);
+let b = (angle as f32 * 30.0) as u8;
